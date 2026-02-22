@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { ArrowLeft, User } from 'lucide-react';
+import { ArrowLeft, User, Camera, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const COMPLAINTS = ['Blurring', 'Itching', 'Watery', 'Redness', 'Other'];
@@ -57,7 +57,29 @@ const ExamInterface = ({ patient, onBack }: Props) => {
   const [referralNeeded, setReferralNeeded] = useState(false);
   const [referralPurpose, setReferralPurpose] = useState('');
 
+  // Eye Images
+  const [eyeImageRe, setEyeImageRe] = useState<string | null>(null);
+  const [eyeImageLe, setEyeImageLe] = useState<string | null>(null);
+  const fileInputRe = useRef<HTMLInputElement>(null);
+  const fileInputLe = useRef<HTMLInputElement>(null);
+
   const [submitting, setSubmitting] = useState(false);
+
+  const handleEyeCapture = (eye: 'RE' | 'LE') => {
+    const input = eye === 'RE' ? fileInputRe.current : fileInputLe.current;
+    input?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>, eye: 'RE' | 'LE') => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (eye === 'RE') setEyeImageRe(reader.result as string);
+      else setEyeImageLe(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
 
   const toggleArray = (arr: string[], item: string, setter: (v: string[]) => void) => {
     setter(arr.includes(item) ? arr.filter(x => x !== item) : [...arr, item]);
@@ -234,7 +256,41 @@ const ExamInterface = ({ patient, onBack }: Props) => {
         </CardContent>
       </Card>
 
-      {/* Step 4: Diagnosis & Prescription */}
+      {/* Step 3.5: Eye Image Capture */}
+      <Card className="mb-3">
+        <CardHeader className="pb-2 pt-3 px-3"><CardTitle className="section-header">Eye Image Capture</CardTitle></CardHeader>
+        <CardContent className="px-3 pb-3">
+          <div className="grid grid-cols-2 gap-3">
+            {(['RE', 'LE'] as const).map(eye => {
+              const img = eye === 'RE' ? eyeImageRe : eyeImageLe;
+              const setImg = eye === 'RE' ? setEyeImageRe : setEyeImageLe;
+              const ref = eye === 'RE' ? fileInputRe : fileInputLe;
+              return (
+                <div key={eye} className="flex flex-col items-center gap-2">
+                  <Label className="text-xs font-medium">{eye === 'RE' ? 'Right Eye' : 'Left Eye'}</Label>
+                  {img ? (
+                    <div className="relative w-full aspect-square rounded-lg overflow-hidden border border-border">
+                      <img src={img} alt={`${eye} capture`} className="w-full h-full object-cover" />
+                      <button onClick={() => setImg(null)} className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-0.5">
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => handleEyeCapture(eye)}
+                      className="w-full aspect-square rounded-lg border-2 border-dashed border-muted-foreground/30 flex flex-col items-center justify-center gap-1 hover:border-primary/50 transition-colors"
+                    >
+                      <Camera className="w-6 h-6 text-muted-foreground" />
+                      <span className="text-[10px] text-muted-foreground">Capture</span>
+                    </button>
+                  )}
+                  <input ref={ref} type="file" accept="image/*" capture="environment" className="hidden" onChange={e => handleFileChange(e, eye)} />
+                </div>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
       <Card className="mb-4">
         <CardHeader className="pb-2 pt-3 px-3"><CardTitle className="section-header">4. Diagnosis & Prescription</CardTitle></CardHeader>
         <CardContent className="px-3 pb-3 space-y-3">

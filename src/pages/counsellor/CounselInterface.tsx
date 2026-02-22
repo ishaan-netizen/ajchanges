@@ -23,6 +23,9 @@ const CounselInterface = ({ patient, onBack }: Props) => {
   // Spectacle
   const [spectaclesGiven, setSpectaclesGiven] = useState(false);
   const [spectaclesPower, setSpectaclesPower] = useState(patient.glass_power || '');
+  const [lensType, setLensType] = useState(patient.lens_type || '');
+  const [eyePowerRe, setEyePowerRe] = useState('');
+  const [eyePowerLe, setEyePowerLe] = useState('');
   const [paymentType, setPaymentType] = useState('Free');
   const [amountCollected, setAmountCollected] = useState('');
 
@@ -44,6 +47,7 @@ const CounselInterface = ({ patient, onBack }: Props) => {
       .update({
         spectacles_given: spectaclesGiven,
         spectacles_power: spectaclesPower,
+        lens_type: lensType || null,
         spectacles_payment_type: paymentType,
         amount_collected: amountCollected ? parseFloat(amountCollected) : 0,
         referral_center: referralCenter,
@@ -125,6 +129,28 @@ const CounselInterface = ({ patient, onBack }: Props) => {
               <div>
                 <Label className="text-xs">Power (from exam)</Label>
                 <Input value={spectaclesPower} onChange={e => setSpectaclesPower(e.target.value)} className="h-8 mt-1 text-xs" />
+              </div>
+              <div>
+                <Label className="text-xs">Lens Type</Label>
+                <Select value={lensType} onValueChange={setLensType}>
+                  <SelectTrigger className="h-8 mt-1 text-xs"><SelectValue placeholder="Select lens type" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Single Vision">Single Vision</SelectItem>
+                    <SelectItem value="Bifocal">Bifocal</SelectItem>
+                    <SelectItem value="Progressive">Progressive</SelectItem>
+                    <SelectItem value="Photochromatic">Photochromatic</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <Label className="text-xs">Eye Power RE</Label>
+                  <Input value={eyePowerRe} onChange={e => setEyePowerRe(e.target.value)} placeholder="e.g. -2.50" className="h-8 mt-1 text-xs" />
+                </div>
+                <div>
+                  <Label className="text-xs">Eye Power LE</Label>
+                  <Input value={eyePowerLe} onChange={e => setEyePowerLe(e.target.value)} placeholder="e.g. -1.75" className="h-8 mt-1 text-xs" />
+                </div>
               </div>
               <div>
                 <Label className="text-xs mb-1 block">Payment</Label>
