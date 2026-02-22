@@ -119,6 +119,8 @@ export type Database = {
           dob: string | null
           dob_status: string | null
           examined_by: string | null
+          eye_image_le_url: string | null
+          eye_image_re_url: string | null
           full_name: string
           fundus_le: string | null
           fundus_re: string | null
@@ -133,6 +135,7 @@ export type Database = {
           iris_re: string | null
           lens_le: string | null
           lens_re: string | null
+          lens_type: string | null
           medicine: string | null
           medicine_other: string | null
           patient_photo_url: string | null
@@ -190,6 +193,8 @@ export type Database = {
           dob?: string | null
           dob_status?: string | null
           examined_by?: string | null
+          eye_image_le_url?: string | null
+          eye_image_re_url?: string | null
           full_name: string
           fundus_le?: string | null
           fundus_re?: string | null
@@ -204,6 +209,7 @@ export type Database = {
           iris_re?: string | null
           lens_le?: string | null
           lens_re?: string | null
+          lens_type?: string | null
           medicine?: string | null
           medicine_other?: string | null
           patient_photo_url?: string | null
@@ -261,6 +267,8 @@ export type Database = {
           dob?: string | null
           dob_status?: string | null
           examined_by?: string | null
+          eye_image_le_url?: string | null
+          eye_image_re_url?: string | null
           full_name?: string
           fundus_le?: string | null
           fundus_re?: string | null
@@ -275,6 +283,7 @@ export type Database = {
           iris_re?: string | null
           lens_le?: string | null
           lens_re?: string | null
+          lens_type?: string | null
           medicine?: string | null
           medicine_other?: string | null
           patient_photo_url?: string | null
