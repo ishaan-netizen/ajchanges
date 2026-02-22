@@ -13,6 +13,7 @@ import CounsellorDashboard from "@/pages/counsellor/CounsellorDashboard";
 import RecordsPage from "@/pages/RecordsPage";
 import SyncPage from "@/pages/SyncPage";
 import AppHeader from "@/components/AppHeader";
+import AppFooter from "@/components/AppFooter";
 import BottomNav from "@/components/BottomNav";
 import NotFound from "@/pages/NotFound";
 
@@ -62,6 +63,7 @@ const ProtectedLayout = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <AppFooter />
       <BottomNav />
     </div>
   );

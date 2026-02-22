@@ -3,6 +3,7 @@ import { useCamp } from '@/contexts/CampContext';
 import { Button } from '@/components/ui/button';
 import { Cloud, CloudOff, LogOut, RefreshCw, MapPin } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import logoHorizontal from '@/assets/logo-horizontal.png';
 
 const AppHeader = () => {
   const { profile, signOut } = useAuth();
@@ -24,9 +25,9 @@ const AppHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-primary text-primary-foreground shadow-md">
-      <div className="flex items-center justify-between px-3 py-2.5">
+      <div className="flex items-center justify-between px-3 py-2">
         <div className="flex items-center gap-2 min-w-0">
-          <span className="font-bold text-sm font-heading shrink-0">AJ</span>
+          <img src={logoHorizontal} alt="Akhand Jyoti Eye Hospital" className="h-8 w-auto brightness-0 invert" />
           {activeCamp && (
             <div className="flex items-center gap-1 text-xs opacity-90 truncate">
               <MapPin className="w-3 h-3 shrink-0" />
@@ -36,7 +37,6 @@ const AppHeader = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Sync Status */}
           <div className="flex items-center gap-1">
             {isOnline ? (
               <Cloud className="w-4 h-4 text-primary-foreground/80" />
@@ -48,7 +48,6 @@ const AppHeader = () => {
             </span>
           </div>
 
-          {/* Change Camp */}
           {activeCamp && (
             <Button
               variant="ghost"
@@ -61,7 +60,6 @@ const AppHeader = () => {
             </Button>
           )}
 
-          {/* Logout */}
           <Button
             variant="ghost"
             size="sm"
@@ -73,7 +71,6 @@ const AppHeader = () => {
         </div>
       </div>
 
-      {/* Role badge */}
       {profile && (
         <div className="bg-primary-foreground/10 px-3 py-1 text-xs flex items-center justify-between">
           <span>{profile.full_name || profile.email}</span>

@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Eye, EyeOff, LogIn } from 'lucide-react';
+import { EyeOff, Eye, LogIn } from 'lucide-react';
+import logoPrimary from '@/assets/logo-primary.png';
 
 const LoginPage = () => {
   const { signIn } = useAuth();
@@ -28,12 +29,7 @@ const LoginPage = () => {
       <div className="w-full max-w-sm animate-fade-in">
         {/* Logo Area */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary flex items-center justify-center">
-            <Eye className="w-10 h-10 text-primary-foreground" />
-          </div>
-          <h1 className="text-2xl font-bold font-heading text-foreground">
-            Akhand Jyoti
-          </h1>
+          <img src={logoPrimary} alt="Akhand Jyoti Eye Hospital" className="w-32 h-32 mx-auto mb-2 object-contain" />
           <p className="text-sm text-muted-foreground mt-1">
             Eye Outreach Program
           </p>
@@ -97,6 +93,10 @@ const LoginPage = () => {
             </p>
           </CardContent>
         </Card>
+
+        <p className="text-[10px] text-muted-foreground text-center mt-6">
+          A Unit of Yugrishi Shriram Sharma Acharya Charitable Trust
+        </p>
       </div>
     </div>
   );
