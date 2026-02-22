@@ -27,7 +27,7 @@ const AppHeader = () => {
     <header className="sticky top-0 z-50 bg-primary text-primary-foreground shadow-md">
       <div className="flex items-center justify-between px-3 py-2">
         <div className="flex items-center gap-2 min-w-0">
-          <img src={logoHorizontal} alt="Akhand Jyoti Eye Hospital" className="h-8 w-auto brightness-0 invert" />
+          <img src={logoHorizontal} alt="Akhand Jyoti Eye Hospital" className="h-8 w-auto object-contain" />
           {activeCamp && (
             <div className="flex items-center gap-1 text-xs opacity-90 truncate">
               <MapPin className="w-3 h-3 shrink-0" />
