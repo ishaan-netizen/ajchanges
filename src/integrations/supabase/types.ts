@@ -17,6 +17,7 @@ export type Database = {
       camp_assignments: {
         Row: {
           assignment_date: string
+          assignment_end_date: string
           camp_id: string
           created_at: string | null
           id: string
@@ -24,6 +25,7 @@ export type Database = {
         }
         Insert: {
           assignment_date?: string
+          assignment_end_date?: string
           camp_id: string
           created_at?: string | null
           id?: string
@@ -31,6 +33,7 @@ export type Database = {
         }
         Update: {
           assignment_date?: string
+          assignment_end_date?: string
           camp_id?: string
           created_at?: string | null
           id?: string
@@ -126,6 +129,8 @@ export type Database = {
           fundus_re: string | null
           gender: string | null
           glass_power: string | null
+          glass_power_le: string | null
+          glass_power_re: string | null
           guardian_mandatory: boolean | null
           guardian_name: string | null
           id: string
@@ -200,6 +205,8 @@ export type Database = {
           fundus_re?: string | null
           gender?: string | null
           glass_power?: string | null
+          glass_power_le?: string | null
+          glass_power_re?: string | null
           guardian_mandatory?: boolean | null
           guardian_name?: string | null
           id?: string
@@ -274,6 +281,8 @@ export type Database = {
           fundus_re?: string | null
           gender?: string | null
           glass_power?: string | null
+          glass_power_le?: string | null
+          glass_power_re?: string | null
           guardian_mandatory?: boolean | null
           guardian_name?: string | null
           id?: string

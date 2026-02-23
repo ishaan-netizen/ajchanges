@@ -46,7 +46,8 @@ export const CampProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .from('camp_assignments')
         .select('camp_id')
         .eq('user_id', user.id)
-        .eq('assignment_date', today)
+        .lte('assignment_date', today)
+        .gte('assignment_end_date', today)
         .maybeSingle();
 
       if (assignment?.camp_id) {
