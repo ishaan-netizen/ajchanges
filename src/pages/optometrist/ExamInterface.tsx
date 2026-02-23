@@ -51,7 +51,8 @@ const ExamInterface = ({ patient, onBack }: Props) => {
   // Step 4: Diagnosis
   const [diagnosis, setDiagnosis] = useState<string[]>([]);
   const [diagnosisOther, setDiagnosisOther] = useState('');
-  const [glassPower, setGlassPower] = useState('');
+  const [glassPowerRe, setGlassPowerRe] = useState('');
+  const [glassPowerLe, setGlassPowerLe] = useState('');
   const [medicine, setMedicine] = useState('');
   const [medicineOther, setMedicineOther] = useState('');
   const [referralNeeded, setReferralNeeded] = useState(false);
@@ -115,7 +116,8 @@ const ExamInterface = ({ patient, onBack }: Props) => {
         fundus_le: anatomy.fundus.le,
         diagnosis,
         diagnosis_other: diagnosisOther,
-        glass_power: glassPower,
+        glass_power_re: glassPowerRe,
+        glass_power_le: glassPowerLe,
         medicine,
         medicine_other: medicineOther,
         referral_needed: referralNeeded,
@@ -308,18 +310,20 @@ const ExamInterface = ({ patient, onBack }: Props) => {
               <Input value={diagnosisOther} onChange={e => setDiagnosisOther(e.target.value)} placeholder="Specify" className="h-8 mt-2 text-xs" />
             )}
           </div>
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <Label className="text-xs">Glass Power</Label>
-              <Select value={glassPower} onValueChange={setGlassPower}>
-                <SelectTrigger className="h-8 mt-1 text-xs"><SelectValue placeholder="Select" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="+">+</SelectItem>
-                  <SelectItem value="-">-</SelectItem>
-                  <SelectItem value="Both">Both</SelectItem>
-                </SelectContent>
-              </Select>
+          <div>
+            <Label className="text-xs mb-2 block">Glass Power</Label>
+            <div className="grid grid-cols-3 gap-2 text-xs mb-1">
+              <div></div>
+              <div className="text-center font-medium text-muted-foreground">RE</div>
+              <div className="text-center font-medium text-muted-foreground">LE</div>
             </div>
+            <div className="grid grid-cols-3 gap-2 items-center">
+              <Label className="text-xs">Power</Label>
+              <Input value={glassPowerRe} onChange={e => setGlassPowerRe(e.target.value)} placeholder="e.g. +2.5" className="h-8 text-xs" />
+              <Input value={glassPowerLe} onChange={e => setGlassPowerLe(e.target.value)} placeholder="e.g. -1.75" className="h-8 text-xs" />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
             <div>
               <Label className="text-xs">Medicine</Label>
               <Select value={medicine} onValueChange={setMedicine}>
